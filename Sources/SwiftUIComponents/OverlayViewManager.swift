@@ -8,18 +8,19 @@
 import SwiftUI
 
 @MainActor
-class OverlayViewManager: ObservableObject {
-    static let shared = OverlayViewManager()
+public class OverlayViewManager: ObservableObject {
+    public static let shared = OverlayViewManager()
+    private init() {}
     
-    @Published var currentOverlay: AnyView? = nil
+    @Published public var currentOverlay: AnyView? = nil
     
-    func show<Content: View>(_ view: Content) {
+    public func show<Content: View>(_ view: Content) {
         DispatchQueue.main.async {
             self.currentOverlay = AnyView(view)
         }
     }
     
-    func dismiss() {
+    public func dismiss() {
         DispatchQueue.main.async {
             self.currentOverlay = nil
         }

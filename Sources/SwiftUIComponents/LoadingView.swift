@@ -7,10 +7,14 @@
 
 import SwiftUI
 
-struct LoadingView: View {
-    var message: String? = nil
+public struct LoadingView: View {
+    public var message: String?
     
-    var body: some View {
+    public init(message: String? = nil) {
+        self.message = message
+    }
+    
+    public var body: some View {
         ZStack {
             /// dimmed background
             Color.black.opacity(0.4)
