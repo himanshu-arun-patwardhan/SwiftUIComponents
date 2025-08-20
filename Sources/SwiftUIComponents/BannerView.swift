@@ -1,6 +1,6 @@
 //
 //  BannerView.swift
-//  SwiftUIComponents
+//
 //
 //
 //
