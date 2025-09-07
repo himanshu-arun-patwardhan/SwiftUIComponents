@@ -7,12 +7,18 @@
 
 import SwiftUI
 
-public struct DateTimeSelectorOverlayView: ComponentViewProtocol {
+public enum DateTimePickerMode {
+    case date
+    case time
+    case dateTime
+}
+
+public struct ComponentDateTimeSelector: ComponentViewProtocol {
     public let title: String
     public let defaultDate: Date
     public let minDate: Date
     public let maxDate: Date
-    public let components: DatePickerComponents
+    public let mode: DateTimePickerMode
     public let onDateSelected: (Date) -> Void
     public let onDismiss: () -> Void
     
@@ -23,7 +29,7 @@ public struct DateTimeSelectorOverlayView: ComponentViewProtocol {
         defaultDate: Date = Date(),
         minDate: Date? = nil,
         maxDate: Date? = nil,
-        components: DatePickerComponents = [.date],
+        mode: DateTimePickerMode = .date,
         onDateSelected: @escaping (Date) -> Void,
         onDismiss: @escaping () -> Void
     ) {
@@ -34,7 +40,7 @@ public struct DateTimeSelectorOverlayView: ComponentViewProtocol {
         self.defaultDate = defaultDate
         self.minDate = minDate ?? threeMonthsAgo
         self.maxDate = maxDate ?? today
-        self.components = components
+        self.mode = mode
         self.onDateSelected = onDateSelected
         self.onDismiss = onDismiss
         
@@ -47,17 +53,14 @@ public struct DateTimeSelectorOverlayView: ComponentViewProtocol {
             ///
             ComponentTheme.Colors.blurBlackBackground
                 .ignoresSafeArea()
-                .onTapGesture {
-                    dismissWithHaptic()
-                }
+                .onTapGesture { dismissWithHaptic() }
             ///
             VStack(spacing: ComponentTheme.Spacing.medium) {
                 ///
                 Text(title)
-                    .font(ComponentTheme.Fonts.title)
-                    .foregroundColor(ComponentTheme.Colors.textPrimary)
+                    .font(.headline)
                 ///
-                buildDateTimePickerView()
+                dateTimePickerView()
                     .onChange(of: selectedDate) { newValue in
                         haptic()
                         onDateSelected(newValue)
@@ -82,9 +85,11 @@ public struct DateTimeSelectorOverlayView: ComponentViewProtocol {
         }
     }
     
+    // MARK: -
     @ViewBuilder
-    private func buildDateTimePickerView() -> some View {
-        if components == .date {
+    private func dateTimePickerView() -> some View {
+        switch mode {
+        case .date:
             DatePicker(
                 "",
                 selection: $selectedDate,
@@ -93,19 +98,29 @@ public struct DateTimeSelectorOverlayView: ComponentViewProtocol {
             )
             .datePickerStyle(GraphicalDatePickerStyle())
             .labelsHidden()
-        } else {
+            
+        case .time:
             DatePicker(
                 "",
                 selection: $selectedDate,
                 in: minDate...maxDate,
-                displayedComponents: components
+                displayedComponents: .hourAndMinute
+            )
+            .datePickerStyle(WheelDatePickerStyle())
+            .labelsHidden()
+            
+        case .dateTime:
+            DatePicker(
+                "",
+                selection: $selectedDate,
+                in: minDate...maxDate,
+                displayedComponents: [.date, .hourAndMinute]
             )
             .datePickerStyle(WheelDatePickerStyle())
             .labelsHidden()
         }
     }
     
-    // MARK: - Helpers
     private func haptic() {
         UIImpactFeedbackGenerator(style: .light).impactOccurred()
     }
