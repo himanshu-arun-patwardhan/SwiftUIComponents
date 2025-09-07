@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-public struct AlertOverlayView: View {
+public struct AlertOverlayView: ComponentViewProtocol {
     public var title: String
     public var subtitle: String
     public var buttonText: String
@@ -28,24 +28,24 @@ public struct AlertOverlayView: View {
     public var body: some View {
         ZStack(alignment: .center) {
             ///
-            Color.white.opacity(0.8)
+            ComponentTheme.Colors.overlayWhiteBackground
                 .edgesIgnoringSafeArea(.all)
                 .onTapGesture {
                     onDismiss()
                     OverlayViewManager.shared.dismiss()
                 }
             ///
-            VStack(spacing: 16) {
+            VStack(spacing: ComponentTheme.Spacing.medium) {
                 ///
                 Text(title)
                     .font(.headline)
                     .multilineTextAlignment(.center)
-                    .padding(.horizontal, 20)
+                    .padding(.horizontal, ComponentTheme.Padding.mediumLarge)
                 ///
                 Text(subtitle)
                     .font(.subheadline)
                     .multilineTextAlignment(.center)
-                    .padding(.horizontal, 20)
+                    .padding(.horizontal, ComponentTheme.Padding.mediumLarge)
                 ///
                 Button(action: {
                     onDismiss()
@@ -57,14 +57,14 @@ public struct AlertOverlayView: View {
                         .padding()
                         .frame(maxWidth: .infinity)
                         .background(.black)
-                        .cornerRadius(10)
+                        .cornerRadius(ComponentTheme.Radius.small)
                 }
             }
             .padding()
             .frame(width: 280)
             .background(
-                RoundedRectangle(cornerRadius: 20)
-                    .fill(Color.white.opacity(0.9))
+                RoundedRectangle(cornerRadius: ComponentTheme.Radius.large)
+                    .fill(ComponentTheme.Colors.overlayWhiteBackground)
                     .shadow(radius: 10)
             )
         }
