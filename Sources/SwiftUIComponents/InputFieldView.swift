@@ -7,8 +7,7 @@
 
 import SwiftUI
 
-// MARK: - ComponentTextField
-public struct ComponentTextField: View {
+public struct ComponentTextField: ComponentViewProtocol {
     @Binding private var text: String
     /// externally managed focus state
     @FocusState.Binding private var isFocused: Bool
@@ -102,8 +101,8 @@ public struct ComponentTextField: View {
         .padding()
         .frame(width: width, height: height)
         .background(
-            RoundedRectangle(cornerRadius: 10)
-                .stroke(Color.gray.opacity(0.5), lineWidth: 2)
+            RoundedRectangle(cornerRadius: ComponentTheme.Radius.small)
+                .stroke(ComponentTheme.Colors.border, lineWidth: 2)
         )
         .toolbar {
             ToolbarItemGroup(placement: .keyboard) {

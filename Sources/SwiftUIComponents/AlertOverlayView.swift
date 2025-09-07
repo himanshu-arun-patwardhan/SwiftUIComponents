@@ -28,7 +28,7 @@ public struct AlertOverlayView: ComponentViewProtocol {
     public var body: some View {
         ZStack(alignment: .center) {
             ///
-            ComponentTheme.Colors.overlayWhiteBackground
+            ComponentTheme.Colors.blurWhiteBackground
                 .edgesIgnoringSafeArea(.all)
                 .onTapGesture {
                     onDismiss()
@@ -64,7 +64,7 @@ public struct AlertOverlayView: ComponentViewProtocol {
             .frame(width: 280)
             .background(
                 RoundedRectangle(cornerRadius: ComponentTheme.Radius.large)
-                    .fill(ComponentTheme.Colors.overlayWhiteBackground)
+                    .fill(ComponentTheme.Colors.blurWhiteBackground)
                     .shadow(radius: 10)
             )
         }

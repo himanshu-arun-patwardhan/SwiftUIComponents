@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-import UIKit
 
 public struct DateTimeSelectorOverlayView: ComponentViewProtocol {
     public let title: String
@@ -46,7 +45,7 @@ public struct DateTimeSelectorOverlayView: ComponentViewProtocol {
     public var body: some View {
         ZStack {
             ///
-            ComponentTheme.Colors.overlayBackground
+            ComponentTheme.Colors.blurBlackBackground
                 .ignoresSafeArea()
                 .onTapGesture {
                     dismissWithHaptic()
@@ -77,7 +76,7 @@ public struct DateTimeSelectorOverlayView: ComponentViewProtocol {
             .background(ComponentTheme.Colors.background)
             .cornerRadius(ComponentTheme.Radius.large)
             .frame(maxWidth: 350)
-            .shadow(radius: 10)
+            .shadow(radius: ComponentTheme.Radius.small)
             .transition(.scale.combined(with: .opacity))
             .animation(.spring(), value: selectedDate)
         }

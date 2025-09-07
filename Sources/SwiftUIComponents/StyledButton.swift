@@ -50,7 +50,7 @@ public struct StyledButton: ComponentViewProtocol {
                 .foregroundStyle(titleColor)
                 .frame(maxWidth: .infinity)
                 .frame(width: frameWidth, height: frameHeight)
-                .padding(10)
+                .padding(ComponentTheme.Padding.small)
                 .background(backgroundColor)
                 .cornerRadius(cornerRadius)
                 .overlay(

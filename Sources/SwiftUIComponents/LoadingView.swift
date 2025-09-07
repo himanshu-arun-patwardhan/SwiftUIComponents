@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-public struct LoadingView: View {
+public struct LoadingView: ComponentViewProtocol {
     public var message: String?
     
     public init(message: String? = nil) {
@@ -16,12 +16,11 @@ public struct LoadingView: View {
     
     public var body: some View {
         ZStack {
-            /// dimmed background
+            ///
             Color.black.opacity(0.4)
                 .ignoresSafeArea()
-            
             /// spinner and message
-            VStack(spacing: 16) {
+            VStack(spacing: ComponentTheme.Spacing.medium) {
                 ProgressView()
                     .progressViewStyle(CircularProgressViewStyle(tint: .white))
                 //                    .scaleEffect(1.5)
@@ -32,9 +31,9 @@ public struct LoadingView: View {
                         .font(.headline)
                 }
             }
-            .padding(32)
-            .background(Color(.systemGray).opacity(0.8))
-            .cornerRadius(16)
+            .padding(ComponentTheme.Padding.xLarge)
+            .background(ComponentTheme.Colors.blurGrayBackground)
+            .cornerRadius(ComponentTheme.Radius.mediumLarge)
         }
         .transition(.opacity)
     }

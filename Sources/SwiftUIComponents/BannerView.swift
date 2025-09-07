@@ -100,7 +100,7 @@ public final class BannerManager: ObservableObject {
 }
 
 // MARK: - BannerView
-public struct BannerView: View {
+public struct BannerView: ComponentViewProtocol {
     @ObservedObject var manager = BannerManager.shared
     
     public init() {}
@@ -119,12 +119,12 @@ public struct BannerView: View {
     }
     
     private var bannerContent: some View {
-        HStack(alignment: .top, spacing: 12) {
+        HStack(alignment: .top, spacing: ComponentTheme.Spacing.medium) {
             manager.data?.type.icon
-                .font(.system(size: 24))
+                .font(ComponentTheme.Fonts.Size.large)
                 .foregroundColor(.white)
             
-            VStack(alignment: .leading, spacing: 4) {
+            VStack(alignment: .leading, spacing: ComponentTheme.Spacing.xSmall) {
                 if let title = manager.data?.title {
                     Text(title)
                         .font(.system(size: 18, weight: .bold))
@@ -132,7 +132,7 @@ public struct BannerView: View {
                 }
                 if let subtitle = manager.data?.subtitle {
                     Text(subtitle)
-                        .font(.system(size: 15))
+                        .font(ComponentTheme.Fonts.Size.small)
                         .foregroundColor(.white)
                 }
             }
@@ -141,8 +141,8 @@ public struct BannerView: View {
         }
         .padding()
         .background(manager.data?.type.backgroundColor ?? .blue)
-        .cornerRadius(12)
-        .shadow(radius: 5)
+        .cornerRadius(ComponentTheme.Radius.medium)
+        .shadow(radius: ComponentTheme.Radius.xSmall)
         .onTapGesture {
             manager.hideCurrent()
         }
