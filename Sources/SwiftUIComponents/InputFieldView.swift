@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-public struct ComponentTextField: ComponentViewProtocol {
+public struct InputFieldView: ComponentViewProtocol {
     @Binding private var text: String
     /// externally managed focus state
     @FocusState.Binding private var isFocused: Bool
@@ -113,7 +113,7 @@ public struct ComponentTextField: ComponentViewProtocol {
             }
         }
         .padding(.horizontal)
-        .id("ComponentTextField") /// For scroll-to-view support
+        .id("InputFieldView") /// For scroll-to-view support
     }
 }
 

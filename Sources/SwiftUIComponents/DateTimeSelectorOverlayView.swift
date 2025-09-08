@@ -13,7 +13,7 @@ public enum DateTimePickerMode {
     case dateTime
 }
 
-public struct ComponentDateTimeSelector: ComponentViewProtocol {
+public struct DateTimeSelectorOverlayView: ComponentViewProtocol {
     public let title: String
     public let defaultDate: Date
     public let minDate: Date

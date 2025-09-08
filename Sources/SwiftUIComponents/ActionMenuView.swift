@@ -56,7 +56,7 @@ public struct ActionMenuSection: Identifiable {
 }
 
 // MARK: -
-public struct ComponentActionMenu<LabelView: View>: View {
+public struct ActionMenuView<LabelView: View>: View {
     private let sections: [ActionMenuSection]
     private let label: () -> LabelView
     ///
@@ -121,41 +121,3 @@ public struct ComponentActionMenu<LabelView: View>: View {
         }
     }
 }
-
-/// How to use: -
-//ComponentActionMenu(
-//items: [
-//    ComponentActionMenuItem(
-//        title: "Edit"
-//        action: { print("Edit") }
-//    )
-//]
-//) {
-//Label("Options", systemImage: "ellipsis.circle")
-//}
-
-//ComponentActionMenu(
-//    sections: [
-//        ComponentActionMenuSection(
-//            title: "General",
-//            items: [
-//                ComponentActionMenuItem(
-//                    title: "Gallery",
-//                    subtitle: "Browse photos",
-//                    icon: .custom(image: Image("galleryIcon")),
-//                    action: { print("Gallery") }
-//                ),
-//                ComponentActionMenuItem(
-//                    title: "Settings",
-//                    subtitle: "Configure preferences",
-//                    icon: .system(name: "gear"),
-//                    isEnabled: false,
-//                    action: { print("Settings") }
-//                )
-//            ]
-//        )
-//    ]
-//) {
-//    Image(systemName: "ellipsis.circle")
-//        .font(.title)
-//}
