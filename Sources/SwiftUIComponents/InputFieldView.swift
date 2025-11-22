@@ -60,8 +60,8 @@ public struct InputFieldView: ComponentViewProtocol {
     public var body: some View {
         HStack {
             ///
-            if let iconName {
-                Image(systemName: iconName)
+            if let leftIcon {
+                Image(systemName: leftIcon)
                     .frame(width: 30, height: 30)
                     .font(.system(size: 20, weight: .semibold))
                     .foregroundColor(.gray)
