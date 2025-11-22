@@ -13,10 +13,10 @@ public struct InputFieldView: ComponentViewProtocol {
     @FocusState.Binding private var isFocused: Bool
     
     private let placeholder: String
-    private let iconName: String?
+    private let leftIcon: String?
     private let rightButtonTitle: String?
-    private let characterLimit: Int
     private let onRightButtonTap: (() -> Void)?
+    private let characterLimit: Int
     private let onTextChange: (String) -> Bool
     private let returnKeyType: UIReturnKeyType
     private let onReturn: () -> Void
@@ -28,10 +28,10 @@ public struct InputFieldView: ComponentViewProtocol {
     public init(
         text: Binding<String>,
         placeholder: String = "",
-        iconName: String? = nil,
+        leftIcon: String? = nil,
         rightButtonTitle: String? = nil,
-        characterLimit: Int = .max,
         onRightButtonTap: (() -> Void)? = nil,
+        characterLimit: Int = .max,
         onTextChange: @escaping (String) -> Bool = { _ in true },
         returnKeyType: UIReturnKeyType = .default,
         onReturn: @escaping () -> Void = {},
@@ -43,10 +43,10 @@ public struct InputFieldView: ComponentViewProtocol {
     ) {
         self._text = text
         self.placeholder = placeholder
-        self.iconName = iconName
+        self.leftIcon = leftIcon
         self.rightButtonTitle = rightButtonTitle
-        self.characterLimit = characterLimit
         self.onRightButtonTap = onRightButtonTap
+        self.characterLimit = characterLimit
         self.onTextChange = onTextChange
         self.returnKeyType = returnKeyType
         self.onReturn = onReturn
@@ -104,14 +104,14 @@ public struct InputFieldView: ComponentViewProtocol {
             RoundedRectangle(cornerRadius: ComponentTheme.Radius.small)
                 .stroke(ComponentTheme.Colors.border, lineWidth: 2)
         )
-        .toolbar {
-            ToolbarItemGroup(placement: .keyboard) {
-                Spacer()
-                Button("Done") {
-                    isFocused = false
-                }
-            }
-        }
+        //        .toolbar {
+        //            ToolbarItemGroup(placement: .keyboard) {
+        //                Spacer()
+        //                Button("Done") {
+        //                    isFocused = false
+        //                }
+        //            }
+        //        }
         .padding(.horizontal)
         .id("InputFieldView") /// For scroll-to-view support
     }
