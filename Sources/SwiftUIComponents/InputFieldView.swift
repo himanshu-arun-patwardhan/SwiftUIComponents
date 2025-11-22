@@ -104,14 +104,6 @@ public struct InputFieldView: ComponentViewProtocol {
             RoundedRectangle(cornerRadius: ComponentTheme.Radius.small)
                 .stroke(ComponentTheme.Colors.border, lineWidth: 2)
         )
-        //        .toolbar {
-        //            ToolbarItemGroup(placement: .keyboard) {
-        //                Spacer()
-        //                Button("Done") {
-        //                    isFocused = false
-        //                }
-        //            }
-        //        }
         .padding(.horizontal)
         .id("InputFieldView") /// For scroll-to-view support
     }
